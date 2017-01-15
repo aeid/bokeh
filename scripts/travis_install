@@ -21,7 +21,7 @@ python -V
 
 echo -e "$PINNED_PKGS" > /home/travis/miniconda/conda-meta/pinned
 
-DEPS_TRAVIS="python=$TRAVIS_PYTHON_VERSION conda=4.1.11 conda-env=2.5.2 conda-build=1.21.14"
+DEPS_TRAVIS="python=$TRAVIS_PYTHON_VERSION conda=4.3.4 conda-env=2.6.0 conda-build=2.1.1"
 conda install --yes $DEPS_TRAVIS
 
 conda config --append channels bokeh
@@ -31,13 +31,13 @@ conda config --set auto_update_conda off
 
 CONDA_PY="${TRAVIS_PYTHON_VERSION/./}" conda build --quiet --no-test conda.recipe
 
-NOARCH_DIR="$HOME/miniconda/conda-bld/noarch"
-echo "noarch build output contents:"
-ls -l $NOARCH_DIR
+LINUX64_DIR="$HOME/miniconda/conda-bld/linux-64"
+echo "linux-64 build output contents:"
+ls -l $LINUX64_DIR
 
-BUILD_FILE_COUNT="$(ls $NOARCH_DIR | wc -l)"
+BUILD_FILE_COUNT="$(ls $LINUX64_DIR | wc -l)"
 if [ $BUILD_FILE_COUNT != 3 ]; then
-   echo "noarch build has wrong number of files"
+   echo "linux-64 build has wrong number of files"
    exit 1
 fi
 
